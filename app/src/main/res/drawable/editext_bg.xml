@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:drawable="@drawable/shape_4074e1_r28" android:state_checked="true" android:state_focused="true" tools:ignore="StateListReachable" />
+    <item android:drawable="@drawable/shape_4074e1_r28" android:state_checked="true" android:state_focused="true" />
+    <item android:drawable="@drawable/shape_ffffff_r28" android:state_focused="false" />
+
+</selector>
