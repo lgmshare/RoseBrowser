@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_backward"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -103,7 +103,7 @@
             android:src="@mipmap/nav_backward" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/btn_go"
+            android:id="@+id/btn_forward"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

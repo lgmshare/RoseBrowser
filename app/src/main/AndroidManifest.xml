@@ -32,7 +32,6 @@
 
         <activity android:name="com.kakaxi.browser.activitys.PrivacyActivity" />
 
-        
 
     </application>
 

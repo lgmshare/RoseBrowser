@@ -13,4 +13,5 @@
     <string name="clean_tips">Close Tabs and Clear Data</string>
     <string name="confirm">Confirm</string>
     <string name="cleaning_dot">Cleaning...</string>
+    <string name="copy_successfully">Copy Successfully</string>
 </resources>

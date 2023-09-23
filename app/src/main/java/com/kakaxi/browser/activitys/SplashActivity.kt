@@ -1,23 +1,70 @@
 package com.kakaxi.browser.activitys
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
+import com.kakaxi.browser.app.AppActivityLifecycleObserver
+import com.kakaxi.browser.app.BaseActivity
 import com.kakaxi.browser.databinding.ActivitySplashBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.Locale
+import java.util.Timer
+import java.util.TimerTask
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySplashBinding
+
+    private var timer: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
-
-
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        if (AppActivityLifecycleObserver.hasMoreActivity()) {
+
+        } else {
+            Firebase.analytics.setUserProperty("Rose_pe", Locale.getDefault().country)
+        }
+
+        binding.progressCircular.progress = 0
+        timer = Timer()
+        timer?.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                binding.progressCircular.let { progressBar ->
+                    val progress = progressBar.progress + 1
+                    if (progress >= 100) {
+                        timer?.cancel()
+                    } else {
+                        progressBar.progress = progress
+                    }
+                }
+            }
+        }, 0, 30) // 定时器每隔 500 毫秒执行一次任务
+
+        lifecycleScope.launch {
+            delay(3000)
+            startActivity(Intent(this@SplashActivity, TabActivity::class.java))
+            finish()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timer?.cancel()
+    }
+
+    override fun onBackPressed() {
+
+    }
 
 }

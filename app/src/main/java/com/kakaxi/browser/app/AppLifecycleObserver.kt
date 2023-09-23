@@ -1,38 +1,15 @@
 package com.kakaxi.browser.app
 
-import android.app.Activity
-import android.app.Application.ActivityLifecycleCallbacks
-import android.os.Bundle
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 
-object AppLifecycleObserver : ActivityLifecycleCallbacks {
+object AppLifecycleObserver : LifecycleEventObserver {
 
-    private var activityCount = 0
 
-    override fun onActivityCreated(p0: Activity, p1: Bundle?) {
-        activityCount++
+
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
     }
 
-    override fun onActivityStarted(p0: Activity) {
-    }
-
-    override fun onActivityResumed(p0: Activity) {
-    }
-
-    override fun onActivityPaused(p0: Activity) {
-    }
-
-    override fun onActivityStopped(p0: Activity) {
-    }
-
-    override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
-    }
-
-    override fun onActivityDestroyed(p0: Activity) {
-        activityCount--
-    }
-
-    fun hasMoreActivity(): Boolean {
-        return activityCount > 1
-    }
 
 }
