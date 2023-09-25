@@ -38,6 +38,20 @@ fun Context.px2dp(px: Float): Int {
 }
 
 /**
+ * 获取屏幕宽度
+ */
+fun Context.getScreenWidth(): Int {
+    return resources.displayMetrics.widthPixels
+}
+
+/**
+ * 获取屏幕高度
+ */
+fun Context.getScreenHeight(): Int {
+    return resources.displayMetrics.heightPixels
+}
+
+/**
  * 调用系统分享
  */
 fun Context.jumpShare(shareText: String?, shareTitle: String? = getString(R.string.txt_share)) {

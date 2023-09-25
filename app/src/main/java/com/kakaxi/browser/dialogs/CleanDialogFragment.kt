@@ -5,7 +5,7 @@ import com.kakaxi.browser.app.BaseDialogFragment
 import com.kakaxi.browser.databinding.DialogCleanBinding
 import com.kakaxi.browser.extensions.setOnBusyClickListener
 
-class CleanDialogFragment : BaseDialogFragment<DialogCleanBinding>() {
+class CleanDialogFragment(private val itemClickListener: (() -> Unit)? = null) : BaseDialogFragment<DialogCleanBinding>() {
 
     override fun onBindViewBinding(): DialogCleanBinding {
         return DialogCleanBinding.inflate(layoutInflater)
@@ -18,6 +18,7 @@ class CleanDialogFragment : BaseDialogFragment<DialogCleanBinding>() {
     override fun initView() {
         binding.btnConfirm.setOnBusyClickListener {
             dismiss()
+            itemClickListener?.invoke()
         }
     }
 }

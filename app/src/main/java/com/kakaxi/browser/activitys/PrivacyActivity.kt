@@ -15,9 +15,9 @@ class PrivacyActivity : BaseActivity() {
         binding = ActivityPrivacyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
     }
 

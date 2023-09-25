@@ -100,7 +100,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="center"
-            android:src="@mipmap/nav_backward" />
+            android:src="@mipmap/nav_backward_disable" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/btn_forward"
@@ -108,7 +108,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="center"
-            android:src="@mipmap/nav_forward" />
+            android:src="@mipmap/nav_forward_disable" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/btn_clean"

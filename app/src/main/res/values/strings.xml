@@ -14,4 +14,6 @@
     <string name="confirm">Confirm</string>
     <string name="cleaning_dot">Cleaning...</string>
     <string name="copy_successfully">Copy Successfully</string>
+    <string name="clean_successfully">Clean Successfully</string>
+    <string name="please_enter_content">Please enter your search content</string>
 </resources>

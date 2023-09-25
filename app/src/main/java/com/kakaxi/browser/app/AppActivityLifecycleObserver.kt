@@ -2,17 +2,26 @@ package com.kakaxi.browser.app
 
 import android.app.Activity
 import android.app.Application.ActivityLifecycleCallbacks
+import android.content.Intent
 import android.os.Bundle
+import com.kakaxi.browser.activitys.SplashActivity
 
 object AppActivityLifecycleObserver : ActivityLifecycleCallbacks {
 
     private var activityCount = 0
+    private var count = 0
 
     override fun onActivityCreated(p0: Activity, p1: Bundle?) {
         activityCount++
     }
 
     override fun onActivityStarted(p0: Activity) {
+        count++
+        if (count == 1) {
+            if (p0 !is SplashActivity) {
+                p0.startActivity(Intent(p0, SplashActivity::class.java))
+            }
+        }
     }
 
     override fun onActivityResumed(p0: Activity) {
@@ -22,6 +31,7 @@ object AppActivityLifecycleObserver : ActivityLifecycleCallbacks {
     }
 
     override fun onActivityStopped(p0: Activity) {
+        count++
     }
 
     override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {

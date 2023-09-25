@@ -2,12 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp">
 
@@ -16,13 +16,13 @@
             android:layout_height="200dp">
 
             <ImageView
-                android:id="@+id/link_image"
+                android:id="@+id/tab_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"  />
+                android:scaleType="centerCrop" />
 
             <ImageView
-                android:id="@+id/link_delete"
+                android:id="@+id/tab_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/icon_circle_delete"
@@ -31,6 +31,11 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ImageView
+            android:id="@+id/item_color_white_ring"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_item_bg" />
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>

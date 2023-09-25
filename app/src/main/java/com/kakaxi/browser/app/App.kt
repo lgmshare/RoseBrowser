@@ -16,8 +16,6 @@ class App : Application() {
         registerActivityLifecycleCallbacks(AppActivityLifecycleObserver)
 
 
-
-
     }
 
 }
