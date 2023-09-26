@@ -51,6 +51,7 @@ class CleanActivity : BaseActivity() {
                 FirebaseEventUtil.event("rose_clean_end")
                 finish()
             }.onFailure {
+                finish()
             }
         }
     }

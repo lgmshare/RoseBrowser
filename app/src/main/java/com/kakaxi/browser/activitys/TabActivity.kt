@@ -80,6 +80,10 @@ class TabActivity : BaseActivity() {
                 }
             })
 
+            btnDelete.setOnBusyClickListener {
+                binding.searchView.text = SpannableStringBuilder("")
+            }
+
             btnBackward.setOnBusyClickListener {
                 onBack()
             }
@@ -176,7 +180,9 @@ class TabActivity : BaseActivity() {
                         updateBottomTools()
 
                         webView.postDelayed({
-                            WebTabManager.updateCurrentWebTabBitmap(webView.drawToBitmap())
+                            if (webView.isLaidOut) {
+                                WebTabManager.updateCurrentWebTabBitmap(webView.drawToBitmap())
+                            }
                         }, 500)
                     }
                 }
@@ -272,7 +278,7 @@ class TabActivity : BaseActivity() {
             WebTabManager.currentWebTab.webView.goBack()
         } else {
             WebTabManager.currentWebTab.webView.stopLoad()
-            stopLoad()
+            updateWebViewVisible(false)
             updateBottomTools()
         }
     }

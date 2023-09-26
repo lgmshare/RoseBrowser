@@ -18,6 +18,7 @@
             android:name=".activitys.SplashActivity"
             android:exported="true"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.RoseBrowser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,13 +27,21 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.kakaxi.browser.activitys.TabActivity" />
+        <activity
+            android:name="com.kakaxi.browser.activitys.TabActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.kakaxi.browser.activitys.TabsActivity" />
+        <activity
+            android:name="com.kakaxi.browser.activitys.TabsActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.kakaxi.browser.activitys.CleanActivity" />
+        <activity
+            android:name="com.kakaxi.browser.activitys.CleanActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.kakaxi.browser.activitys.PrivacyActivity" />
+        <activity
+            android:name="com.kakaxi.browser.activitys.PrivacyActivity"
+            android:screenOrientation="portrait" />
 
 
     </application>

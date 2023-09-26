@@ -62,6 +62,7 @@ class MyWebView @JvmOverloads constructor(context: Context = App.INSTANCE, attri
         }
 
     var startTimes = 0L
+    var isClearHistory = false
 
     fun startLoad(path: String) {
         loadState = WebState.LOADING
@@ -79,13 +80,18 @@ class MyWebView @JvmOverloads constructor(context: Context = App.INSTANCE, attri
 
     fun clearWebHistory() {
         stopLoad()
-        destroy()
         clearHistory()
+        isClearHistory = true
     }
 
     inner class MyWebChromeClient : WebChromeClient() {
         override fun onProgressChanged(view: WebView, newProgress: Int) {
             if (loadState != WebState.STOPPED) {
+                if (isClearHistory) {
+                    isClearHistory = false
+                    view.clearHistory()
+                }
+
                 loadState = if (newProgress >= 100) {
                     if (startTimes != 0L) {
                         FirebaseEventUtil.webLoadEvent(((System.currentTimeMillis() - startTimes) / 1000))
