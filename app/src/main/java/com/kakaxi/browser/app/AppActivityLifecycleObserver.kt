@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application.ActivityLifecycleCallbacks
 import android.content.Intent
 import android.os.Bundle
+import com.google.android.gms.ads.AdActivity
 import com.kakaxi.browser.activitys.SplashActivity
 
 object AppActivityLifecycleObserver : ActivityLifecycleCallbacks {
@@ -32,6 +33,9 @@ object AppActivityLifecycleObserver : ActivityLifecycleCallbacks {
 
     override fun onActivityStopped(p0: Activity) {
         count++
+        if (p0 is AdActivity) {
+            p0.finish()
+        }
     }
 
     override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {

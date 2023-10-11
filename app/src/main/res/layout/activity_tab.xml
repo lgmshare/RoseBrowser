@@ -72,12 +72,29 @@
         android:id="@+id/nav_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="21dp"
         android:padding="6dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/adContainer"
         app:spanCount="4"
         tools:listitem="@layout/item_link" />
+
+    <FrameLayout
+        android:id="@+id/adContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_ad" />
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/webContainer"

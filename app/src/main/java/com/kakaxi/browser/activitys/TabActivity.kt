@@ -12,9 +12,13 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.gms.ads.nativead.NativeAd
 import com.kakaxi.browser.BuildConfig
 import com.kakaxi.browser.R
 import com.kakaxi.browser.WebTabManager
+import com.kakaxi.browser.ad.AdManager
+import com.kakaxi.browser.ad.AdPosition
+import com.kakaxi.browser.ad.AdPositionPage
 import com.kakaxi.browser.adapters.LinkAdapter
 import com.kakaxi.browser.app.BaseActivity
 import com.kakaxi.browser.databinding.ActivityTabBinding
@@ -216,6 +220,23 @@ class TabActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         FirebaseEventUtil.event("rose_show")
+        AdManager.preload()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!binding.webContainer.isVisible) {
+            lifecycleScope.launchWhenResumed {
+                AdPosition.NATIVE.load()?.join()
+                if (!binding.webContainer.isVisible && (WebTabManager.currentWebTab.webView.isIdea || WebTabManager.currentWebTab.webView.isStopped)) {
+                    AdPositionPage.HOME.show(this@TabActivity, binding.adContainer)
+                }
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
     }
 
     override fun onUserInteraction() {
@@ -225,7 +246,14 @@ class TabActivity : BaseActivity() {
 
     private fun updateWebViewVisible(isVisible: Boolean) {
         binding.webContainer.isVisible = isVisible
-        if (!isVisible) {
+        if (isVisible) {
+            binding.adContainer.isVisible = false
+            val tag = binding.adContainer.tag
+            if (tag is NativeAd) {
+                tag.destroy()
+            }
+            binding.adContainer.removeAllViews()
+        } else {
             binding.progressBar.isVisible = false
             binding.webContainer.removeAllViews()
         }

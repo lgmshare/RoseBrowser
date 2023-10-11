@@ -1,15 +1,18 @@
 package com.kakaxi.browser.activitys
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kakaxi.browser.WebTabManager
+import com.kakaxi.browser.ad.AdPosition
+import com.kakaxi.browser.ad.AdPositionPage
 import com.kakaxi.browser.adapters.TabAdapter
 import com.kakaxi.browser.app.BaseActivity
 import com.kakaxi.browser.databinding.ActivityTabsBinding
 import com.kakaxi.browser.extensions.setOnBusyClickListener
 import com.kakaxi.browser.models.WebTab
 import com.kakaxi.browser.utils.FirebaseEventUtil
+import kotlinx.coroutines.delay
 
 class TabsActivity : BaseActivity() {
 
@@ -42,12 +45,19 @@ class TabsActivity : BaseActivity() {
             btnBack.setOnBusyClickListener {
                 finish()
             }
-
         }
         binding.tabsRecyclerView.layoutManager = GridLayoutManager(this, 2)
         binding.tabsRecyclerView.adapter = adapter
 
         updateData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launchWhenResumed {
+            delay(300)
+            AdPositionPage.TAP.show(this@TabsActivity, binding.adContainer)
+        }
     }
 
     private fun remoteWeb(link: WebTab) {

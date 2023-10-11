@@ -7,12 +7,18 @@ import androidx.lifecycle.lifecycleScope
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import com.kakaxi.browser.DataStore
+import com.kakaxi.browser.ad.AdManager
+import com.kakaxi.browser.ad.AdPosition
+import com.kakaxi.browser.ad.AdPositionPage
 import com.kakaxi.browser.app.AppActivityLifecycleObserver
 import com.kakaxi.browser.app.BaseActivity
 import com.kakaxi.browser.databinding.ActivitySplashBinding
 import com.kakaxi.browser.utils.FirebaseEventUtil
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
@@ -22,6 +28,7 @@ class SplashActivity : BaseActivity() {
     private lateinit var binding: ActivitySplashBinding
 
     private var timer: Timer? = null
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +51,8 @@ class SplashActivity : BaseActivity() {
 
         Firebase.analytics.setUserProperty("Rose_pe", Locale.getDefault().country)
 
+        AdManager.preload()
+
         binding.progressCircular.progress = 0
         timer = Timer()
         timer?.scheduleAtFixedRate(object : TimerTask() {
@@ -57,20 +66,33 @@ class SplashActivity : BaseActivity() {
                     }
                 }
             }
-        }, 0, 30) // 定时器每隔 500 毫秒执行一次任务
+        }, 0, 100) // 定时器每隔 500 毫秒执行一次任务
 
-        lifecycleScope.launch {
-            delay(3000)
-            if (!AppActivityLifecycleObserver.hasMoreActivity()) {
-                startActivity(Intent(this@SplashActivity, TabActivity::class.java))
+        job = lifecycleScope.launch {
+            kotlin.runCatching {
+                withTimeoutOrNull(14000) {
+                    launch {
+                        delay(3000)
+                    }
+                    launch {
+                        AdPosition.LOADING.load()?.join()
+                    }
+                }
+            }.onSuccess {
+                AdPositionPage.LOADING.show(this@SplashActivity) {
+                    if (!AppActivityLifecycleObserver.hasMoreActivity()) {
+                        startActivity(Intent(this@SplashActivity, TabActivity::class.java))
+                    }
+                    finish()
+                }
             }
-            finish()
         }
     }
 
     override fun onStop() {
         super.onStop()
         timer?.cancel()
+        job?.cancel()
     }
 
     override fun onBackPressed() {
