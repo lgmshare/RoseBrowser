@@ -12,7 +12,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 enum class AdPositionPage(val pos: AdPosition) {
-    LOADING(AdPosition.LOADING), HOME(AdPosition.NATIVE), TAP(AdPosition.NATIVE), CLEAN(AdPosition.CLEAN);
+    LOADING(AdPosition.OPEN), HOME(AdPosition.NATIVE), TAP(AdPosition.NATIVE), CLEAN(AdPosition.INTER);
 
     private var showTime: Long = 0
 
@@ -22,7 +22,7 @@ enum class AdPositionPage(val pos: AdPosition) {
             return
         }
 
-        if (System.currentTimeMillis() - showTime < 12000) {
+        if (System.currentTimeMillis() - showTime < 10000) {
             Utils.log("$this 刷新时间不足")
             return
         }
@@ -67,7 +67,7 @@ enum class AdPositionPage(val pos: AdPosition) {
 
 enum class AdPosition {
 
-    LOADING, NATIVE, CLEAN;
+    OPEN, NATIVE, INTER;
 
     private var job: Job? = null
     private val cacheData = mutableListOf<AdData>()
@@ -87,8 +87,8 @@ enum class AdPosition {
 
     fun getAdType(): String {
         return when (this) {
-            LOADING -> "open"
-            CLEAN -> "inter"
+            OPEN -> "open"
+            INTER -> "inter"
             else -> "native"
         }
     }

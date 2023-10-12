@@ -2,7 +2,6 @@ package com.kakaxi.browser.activitys
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
@@ -16,7 +15,6 @@ import com.kakaxi.browser.databinding.ActivitySplashBinding
 import com.kakaxi.browser.utils.FirebaseEventUtil
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 import java.util.Locale
@@ -75,7 +73,7 @@ class SplashActivity : BaseActivity() {
                         delay(3000)
                     }
                     launch {
-                        AdPosition.LOADING.load()?.join()
+                        AdPosition.OPEN.load()?.join()
                     }
                 }
             }.onSuccess {

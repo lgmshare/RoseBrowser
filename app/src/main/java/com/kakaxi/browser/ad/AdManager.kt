@@ -1,9 +1,6 @@
 package com.kakaxi.browser.ad
 
-import android.content.Context
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.kakaxi.browser.DataStore
-import com.kakaxi.browser.app.App
 import com.kakaxi.browser.utils.FirebaseRemoteConfigUtil
 import com.kakaxi.browser.utils.Utils
 
@@ -41,18 +38,18 @@ object AdManager {
 
     fun preload() {
         setupLimitCount()
-        AdPosition.LOADING.load()
+        AdPosition.OPEN.load()
         AdPosition.NATIVE.load()
-        AdPosition.CLEAN.load()
+        AdPosition.INTER.load()
     }
 
     fun getPositionConfig(adPosition: AdPosition): AdPositionBean? {
         if (adConfigBean == null) return null
 
         return when (adPosition) {
-            AdPosition.LOADING -> adConfigBean?.v_loading
-            AdPosition.NATIVE -> adConfigBean?.v_home
-            AdPosition.CLEAN -> adConfigBean?.v_clean
+            AdPosition.OPEN -> adConfigBean?.v_open
+            AdPosition.NATIVE -> adConfigBean?.v_native
+            AdPosition.INTER -> adConfigBean?.v_inter
         }
     }
 

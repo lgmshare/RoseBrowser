@@ -3,9 +3,9 @@ package com.kakaxi.browser.ad
 data class AdConfigResponse(
     val max_click_num: Int = 0,
     val max_show_num: Int = 0,
-    val v_loading: AdPositionBean? = null,
-    val v_home: AdPositionBean? = null,
-    val v_clean: AdPositionBean? = null,
+    val v_open: AdPositionBean? = null,
+    val v_native: AdPositionBean? = null,
+    val v_inter: AdPositionBean? = null,
 )
 
 data class AdPositionBean(

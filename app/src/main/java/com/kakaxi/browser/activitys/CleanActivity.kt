@@ -2,7 +2,6 @@ package com.kakaxi.browser.activitys
 
 import android.os.Bundle
 import android.webkit.CookieManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.kakaxi.browser.R
 import com.kakaxi.browser.WebTabManager
@@ -11,12 +10,10 @@ import com.kakaxi.browser.ad.AdPosition
 import com.kakaxi.browser.ad.AdPositionPage
 import com.kakaxi.browser.app.BaseActivity
 import com.kakaxi.browser.databinding.ActivityCleanBinding
-import com.kakaxi.browser.databinding.ActivitySplashBinding
 import com.kakaxi.browser.extensions.toast
 import com.kakaxi.browser.utils.FirebaseEventUtil
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 
@@ -43,7 +40,7 @@ class CleanActivity : BaseActivity() {
                     }
 
                     launch {
-                        AdPosition.CLEAN.load()?.join()
+                        AdPosition.INTER.load()?.join()
                     }
 
                     launch {

@@ -45,3 +45,4 @@
 }
 
 -keep class com.kakaxi.browser.models.** {*;}
+-keep class com.kakaxi.browser.ad.AdConfigResponse
