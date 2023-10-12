@@ -2,7 +2,7 @@
     <string name="facebook_app_id">1234</string>
     <string name="facebook_client_token">56789</string>
 
-    <string name="app_name">RoseBrowser</string>
+    <string name="app_name">Rose Browser</string>
 
     <string name="txt_share">Share</string>
     <string name="txt_copy">Copy</string>
